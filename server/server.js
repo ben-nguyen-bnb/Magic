@@ -5,6 +5,7 @@ const multer = require("multer");
 
 var app = Express();
 app.use(cors());
+module.exports = app
 
 var CONNECTION_STRING = "mongodb+srv://nben7890:57NOFNe!@cluster0.pd9u7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 var DATABASE_NAME = "Magic";
@@ -23,6 +24,10 @@ app.listen(5038, () => {
     });
 });
 
+
+// Users collection
+
+// Get all Users
 app.get("/Users", (request, response) => {
     database.collection('Users').find({}).toArray((error, result) => {
         response.send(result);
