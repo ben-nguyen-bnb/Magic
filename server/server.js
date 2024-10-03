@@ -38,6 +38,7 @@ app.get("/Users/GetAll", async (request, response) => {
 
 // Get User
 app.get("/Users/GetUser", async (request, response) => {
+    console.log("GET USER CALLED")
     const user = await database.collection("Users").findOne({
         username: request.query.username
     })
@@ -47,7 +48,8 @@ app.get("/Users/GetUser", async (request, response) => {
 // Create New User
 app.get("/Users/CreateUser", async (request, response) => {
     await database.collection('Users').insertOne({
-        username: request.query.username
+        username: request.query.username,
+        password: request.query.password
     })
     await response.json(request.query.username + " ADDED")
 })
