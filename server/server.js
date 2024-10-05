@@ -29,9 +29,6 @@ app.listen(5038, () => {
 
 // Get all Users
 app.get("/Users/GetAll", async (request, response) => {
-    // await database.collection('Users').find({}).toArray((error, result) => {
-    //     response.send(result);
-    // });
     const userList = await database.collection('Users').find({}).toArray()
     return response.status(200).json(userList)
 });
@@ -47,6 +44,7 @@ app.get("/Users/GetUser", async (request, response) => {
 
 // Create New User
 app.get("/Users/CreateUser", async (request, response) => {
+    console.log("")
     await database.collection('Users').insertOne({
         username: request.query.username,
         password: request.query.password

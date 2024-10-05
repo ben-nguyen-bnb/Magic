@@ -1,28 +1,22 @@
-
 const API_URL = "http://localhost:5038/Users/";
 
-// export class UsersService {
-//     constructor() {}
-
-//     async getAllUsers() {
-//         const response = fetch(this.API_URL+"Users")
-//         const result = (await response).json()
-//         return result
-//     }
-// }
-
+// Get all users
 export const getAllUsernames = async (username) => {
-
+    try {
+        const API_URL_REQUEST = API_URL + "GetAll"
+        const response = await fetch(API_URL_REQUEST)
+        const result = response.json()
+        return result
+    } catch(error) {
+        console.error("Error creating new account", error)
+    }
 }
 
+// get Specific user
 export const login = async (username) => {
     try {
         const API_URL_REQUEST = API_URL + "GetUser?username=" + username
-        const response = await fetch("http://localhost:5038/Users/GetUser?username=nben7890")
-        // if (!response.ok) {
-        //     const errorData = await response.json()
-        //     throw new
-        // }
+        const response = await fetch(API_URL_REQUEST)
         const data = await response.json()
         return data
     } catch (error) {
@@ -30,13 +24,18 @@ export const login = async (username) => {
     }
 }
 
+// create new user
 export const createNewUser = async (username, password) => {
-    // First, check if username is already in database
-
-
-    // Second, create new user if username not already in database
+    try {
+        const API_URL_REQUEST = API_URL + "CreateUser?username=" + username + "&password=" + password
+        const response = await fetch(API_URL_REQUEST)
+        return response
+    } catch(error) {
+        console.error("Error creating new account")
+    }
 }
 
+// delete user
 export const deleteUser = async (username) => {
 
 }

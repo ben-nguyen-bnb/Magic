@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
-import { UsersService } from './service/users';
 import HomeComponent from './pages/homeComponent'
 import LoginComponent from './pages/loginComponent';
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import CreateUserComponent from './pages/createUserComponent';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 
 export default function App() {
   return (
@@ -12,6 +11,7 @@ export default function App() {
       <Routes>
         <Route index element={<LoginComponent />}></Route>
         <Route path="Home" element={<HomeComponent />}></Route>
+        <Route path="CreateAccount" element={<CreateUserComponent />}></Route>
       </Routes>
     </BrowserRouter>
   );
