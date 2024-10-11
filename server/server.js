@@ -43,13 +43,25 @@ app.get("/Users/GetUser", async (request, response) => {
 })
 
 // Create New User
-app.get("/Users/CreateUser", async (request, response) => {
-    console.log("")
+app.post("/Users/CreateUser", async (request, response) => {
     await database.collection('Users').insertOne({
         username: request.query.username,
-        password: request.query.password
+        password: request.query.password,
+        decks: []
     })
     await response.json(request.query.username + " ADDED")
+})
+
+// Add Deck to User
+app.post("/Users/AddDeck/:username", async (request, response) => {
+    const { username } = request.params
+
+    await database.collection('Users').updateOne(
+        { username: username },
+        { $push: { decks: request.query.deckname}}
+    )
+
+    await response.json(request.query.deckname + " Deck ADDED")
 })
 
 // Delete User
@@ -58,4 +70,16 @@ app.get("/Users/DeleteUser", async (request, response) => {
         username: request.query.username
     })
     await response.json(request.query.username + " DELETED")
+})
+
+// Delete Deck from User
+app.get("/Users/DeleteDeck/:username", async (request, response) => {
+    const { username } = request.params
+
+    await database.collection('Users').updateOne(
+        { username: username},
+        { $pull: { decks: request.query.deckname}}
+    )
+
+    await response.json(request.query.deckname + " Deck Deleted")
 })
